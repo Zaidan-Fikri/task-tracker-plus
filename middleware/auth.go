@@ -14,7 +14,7 @@ func Auth() gin.HandlerFunc {
 		if err != nil {
 			contentType := ctx.Request.Header.Get("Content-Type")
 			if contentType != "application/json" {
-				ctx.Redirect(http.StatusSeeOther, "/user/login")
+				ctx.Redirect(http.StatusSeeOther, "/")
 				return
 			} else {
 				ctx.JSON(http.StatusUnauthorized, "cookie not found")

@@ -30,7 +30,7 @@ func (c *categoryClient) CategoryList(token string) ([]*model.Category, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", config.SetUrl("/api/v1/Category/list"), nil)
+	req, err := http.NewRequest("GET", config.SetUrl("/api/v1/category/list"), nil)
 	if err != nil {
 		return nil, err
 	}

@@ -172,12 +172,12 @@ func RunClient(db *gorm.DB, gin *gin.Engine, embed embed.FS) *gin.Engine {
 
 	user := gin.Group("/client")
 	{
-		user.Use(middleware.Auth())
 		user.GET("/login", client.AuthWeb.Login)
 		user.POST("/login/process", client.AuthWeb.LoginProcess)
 		user.GET("/register", client.AuthWeb.Register)
 		user.POST("/register/process", client.AuthWeb.RegisterProcess)
 		user.GET("/logout", client.AuthWeb.Logout)
+		user.Use(middleware.Auth())
 	}
 
 	main := gin.Group("/client")
