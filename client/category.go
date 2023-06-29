@@ -12,7 +12,7 @@ import (
 
 type CategoryClient interface {
 	CategoryList(token string) ([]*model.Category, error)
-	AddCategory(token, name string) (respCode int, err error)
+	AddCategory(token string, category model.Category) (respCode int, err error)
 	UpdateCategory(token, id, name string) (respCode int, err error)
 	DeleteCategory(token, id string) (respCode int, err error)
 }
@@ -61,14 +61,14 @@ func (c *categoryClient) CategoryList(token string) ([]*model.Category, error) {
 	return Categorys, nil
 }
 
-func (c *categoryClient) AddCategory(token, name string) (respCode int, err error) {
+func (c *categoryClient) AddCategory(token string, category model.Category) (respCode int, err error) {
 	client, err := GetClientWithCookie(token)
 	if err != nil {
 		return -1, err
 	}
 
-	datajson := map[string]string{
-		"name": name,
+	datajson := map[string]interface{}{
+		"name": category.Name,
 	}
 
 	data, err := json.Marshal(datajson)
